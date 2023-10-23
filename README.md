@@ -16,10 +16,10 @@
 
 Пункт 6
 
-![docker_files](./screeshots/docker files.png)
+<img src="./screenshots/docker files.png"/>
 
 
 Пункт 7
 
-![ngrok](./screeshots/ngrok.png)
+<img src="./screenshots/ngrok.png"/>
 
