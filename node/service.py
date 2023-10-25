@@ -10,7 +10,7 @@ from uc_http_requester.requester import Request
 
 
 class NodeType(flow.NodeType):
-    id: str = '1'
+    id: str = 'c8cf1555-d905-4818-971d-0f59f4190479'
     type: flow.NodeType.Type = flow.NodeType.Type.action
     name: str = 'alan_dzheliev_app'
     displayName: str = 'alan_dzheliev_app'
