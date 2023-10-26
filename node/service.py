@@ -55,7 +55,7 @@ class InfoView(info.Info):
 class ExecuteView(execute.Execute):
     async def post(self, json: NodeRunContext) -> NodeRunContext:
         try:
-            if json.node.data.properties.get('switcher_field') != None:
+            if json.node.data.properties.get('switcher_field') is not None:
                 await json.save_result({
                     "result": int(json.node.data.properties['foo_field']) + int(json.node.data.properties['numeric_field'])
                 })
