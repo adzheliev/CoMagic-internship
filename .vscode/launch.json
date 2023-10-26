@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "/usr/local/bin/uc",
       "env": {
-        "PYTHONPATH": "/workspaces/uc-flow-node"
+        "PYTHONPATH": "/workspaces/CoMagic-internship"
       },
       "console": "integratedTerminal",
       "args": [

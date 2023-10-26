@@ -10,7 +10,7 @@ from uc_http_requester.requester import Request
 
 
 class NodeType(flow.NodeType):
-    id: str = 'c8cf1555-d905-4818-971d-0f59f4190479'
+    id: str = '7ba71506-83f5-48a4-9181-fa3d89675e33'
     type: flow.NodeType.Type = flow.NodeType.Type.action
     name: str = 'alan_dzheliev_app'
     displayName: str = 'alan_dzheliev_app'
@@ -25,6 +25,24 @@ class NodeType(flow.NodeType):
             description='Foo description',
             required=True,
             default='Test data',
+        ),
+        Property(
+            displayName='Числовое поле',
+            name='numeric_field',
+            type=Property.Type.JSON,
+            placeholder='Numeric placeholder',
+            description='Numeric description',
+            required=True,
+            default='Test data',
+        ),
+        Property(
+            displayName='String/numeric switcher',
+            name='switcher_field',
+            type=Property.Type.BOOLEAN,
+            placeholder='Switcher placeholder',
+            description='Switcher description',
+            required=True,
+            default='Test data',
         )
     ]
 
@@ -37,9 +55,14 @@ class InfoView(info.Info):
 class ExecuteView(execute.Execute):
     async def post(self, json: NodeRunContext) -> NodeRunContext:
         try:
-            await json.save_result({
-                "result": json.node.data.properties['foo_field']
-            })
+            if json.node.data.properties.get('switcher_field') != None:
+                await json.save_result({
+                    "result": int(json.node.data.properties['foo_field']) + int(json.node.data.properties['numeric_field'])
+                })
+            else:
+                await json.save_result({
+                    "result": str(json.node.data.properties['foo_field']) + str(json.node.data.properties['numeric_field'])
+                })
             json.state = RunState.complete
         except Exception as e:
             self.log.warning(f'Error {e}')

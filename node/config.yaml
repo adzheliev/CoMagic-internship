@@ -1,4 +1,4 @@
-service_name: 'c8cf1555-d905-4818-971d-0f59f4190479'
+service_name: '7ba71506-83f5-48a4-9181-fa3d89675e33'
 
 http:
   url: http://0.0.0.0:9000
@@ -15,8 +15,9 @@ uc_flow_node:
   register_on_start: false
   execute_view_queue_size: 500
   execute_view_workers: 5
-  private_url: https://f7e6-2a03-d000-1484-117c-70c6-5293-9b90-bfae.ngrok-fre
-  public_url: https://f7e6-2a03-d000-1484-117c-70c6-5293-9b90-bfae.ngrok-fre
+  private_url: https://6533-2a03-d000-1484-117c-b8f6-fbe-9909-61ff.ngrok-free.app
+  public_url: https://6533-2a03-d000-1484-117c-b8f6-fbe-9909-61ff.ngrok-free.app
   uc_flow:
-    domain: https://uc-flow-v2-pp-api.uis.ru
+    domain: https://uc-flow-v2-pp-api.uis.st
     jwt_secret: 9109a79d-74f9-45bd-b369-5e7a885421e5s
+ 
