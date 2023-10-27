@@ -15,28 +15,28 @@ class NodeType(flow.NodeType):
     name: str = 'alan_dzheliev_app'
     displayName: str = 'alan_dzheliev_app'
     icon: str = '<svg><text x="8" y="50" font-size="50">🤖</text></svg>'
-    description: str = 'Пример для стажировки в CoMagic'
+    description: str = 'Application by Alan Dzheliev'
     properties: List[Property] = [
         Property(
             displayName='Тестовое поле',
-            name='foo_field',
-            type=Property.Type.JSON,
-            placeholder='Foo placeholder',
-            description='Foo description',
+            name='string_field',
+            type=Property.Type.STRING,
+            placeholder='String placeholder',
+            description='String description',
             required=True,
             default='Test data',
         ),
         Property(
             displayName='Числовое поле',
             name='numeric_field',
-            type=Property.Type.JSON,
+            type=Property.Type.NUMBER,
             placeholder='Numeric placeholder',
             description='Numeric description',
             required=True,
             default='Test data',
         ),
         Property(
-            displayName='String/numeric switcher',
+            displayName='String if OFF/numeric if ON',
             name='switcher_field',
             type=Property.Type.BOOLEAN,
             placeholder='Switcher placeholder',
@@ -57,11 +57,11 @@ class ExecuteView(execute.Execute):
         try:
             if json.node.data.properties.get('switcher_field') is not None:
                 await json.save_result({
-                    "result": int(json.node.data.properties['foo_field']) + int(json.node.data.properties['numeric_field'])
+                    "result": int(json.node.data.properties['string_field']) + int(json.node.data.properties['numeric_field'])
                 })
             else:
                 await json.save_result({
-                    "result": str(json.node.data.properties['foo_field']) + str(json.node.data.properties['numeric_field'])
+                    "result": str(json.node.data.properties['string_field']) + str(json.node.data.properties['numeric_field'])
                 })
             json.state = RunState.complete
         except Exception as e:
