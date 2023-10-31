@@ -1,12 +1,18 @@
 import ujson
 from typing import List, Tuple
+from enum import Enum
 
 from uc_flow_nodes.schemas import NodeRunContext
 from uc_flow_nodes.service import NodeService
 from uc_flow_nodes.views import info, execute
 from uc_flow_schemas import flow
-from uc_flow_schemas.flow import Property, CredentialProtocol, RunState
+from uc_flow_schemas.flow import Property, CredentialProtocol, RunState, DisplayOptions, OptionValue
 from uc_http_requester.requester import Request
+
+
+class Option(str, Enum):
+    value_1 = 'Value_1'
+    value_2 = 'Value_2'
 
 
 class NodeType(flow.NodeType):
@@ -18,33 +24,94 @@ class NodeType(flow.NodeType):
     description: str = 'Application by Alan Dzheliev'
     properties: List[Property] = [
         Property(
-            displayName='Тестовое поле',
-            name='string_field',
-            type=Property.Type.STRING,
-            placeholder='String placeholder',
-            description='String description',
-            required=True,
-            default='Test data',
-        ),
-        Property(
-            displayName='Числовое поле',
-            name='numeric_field',
-            type=Property.Type.NUMBER,
-            placeholder='Numeric placeholder',
-            description='Numeric description',
-            required=True,
-            default='Test data',
-        ),
-        Property(
-            displayName='String if OFF/numeric if ON',
+            displayName='Переключатель',
             name='switcher_field',
             type=Property.Type.BOOLEAN,
             placeholder='Switcher placeholder',
             description='Switcher description',
             required=True,
             default='Test data',
-        )
+        ),
+        Property(
+            displayName='Первое поле',
+            name='first_field',
+            type=Property.Type.OPTIONS,
+            noDataExpression=True,
+            displayOptions=DisplayOptions(
+                show={
+                    'switcher_field': [True]},
+            ),
+            options=[
+                OptionValue(
+                    name='Значение 1',
+                    value='Value_1',
+                    description='Значение 1',
+                ),
+                OptionValue(
+                    name='Значение 2',
+                    value='Value_2',
+                    description='Значение 2',
+                ),
+            ],
+        ),
+        Property(
+            displayName='Второе поле',
+            name='second_field',
+            type=Property.Type.OPTIONS,
+            noDataExpression=True,
+            displayOptions=DisplayOptions(
+                show={
+                    'switcher_field': [True]},
+            ),
+            options=[
+                OptionValue(
+                    name='Значение 1',
+                    value='Value_1',
+                    description='Значение 1',
+                ),
+                OptionValue(
+                    name='Значение 2',
+                    value='Value_2',
+                    description='Значение 2',
+                ),
+            ],
+        ),
+        Property(
+            displayName='Поле для ввода почты',
+            name='email_field',
+            type=Property.Type.STRING,
+            noDataExpression=True,
+            displayOptions=DisplayOptions(
+                show={
+                    'first_field': [
+                        Option.value_1
+                    ],
+                    'second_field': [
+                        Option.value_1
+                    ],
+                },
+            ),
+        ),
+        Property(
+            displayName='Поле для ввода даты и времени',
+            name='date_time_field',
+            type=Property.Type.DATETIME,
+            noDataExpression=True,
+            displayOptions=DisplayOptions(
+                show={
+                    'first_field': [
+                        Option.value_2
+                    ],
+                    'second_field': [
+                        Option.value_2
+                    ],
+                },
+            ),
+        ),  
     ]
+
+
+
 
 
 class InfoView(info.Info):
